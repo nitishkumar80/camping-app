@@ -8,9 +8,9 @@ const EmergencyInfoPage: React.FC = () => {
 
   // Sample data for emergency information
   const emergencyData = [
-    { id: '1', title: 'Yellowstone National Park', contact: 'Ranger Station: (406) 344-7381', icon: 'call-outline' },
-    { id: '2', title: 'Yosemite National Park', contact: 'Ranger Station: (209) 372-0200', icon: 'call-outline' },
-    { id: '3', title: 'Grand Canyon National Park', contact: 'Medical Services: (928) 638-2551', icon: 'medkit-outline' },
+    { id: '1', title: 'Betla National Park', contact: 'Ranger Station: (000) 344-7381', icon: 'call-outline' },
+    { id: '2', title: 'Dalma Wildlife Sanctuary', contact: 'Ranger Station: (000) 372-0200', icon: 'call-outline' },
+    { id: '3', title: 'Palamau Wildlife Sanctuary', contact: 'Medical Services: (000) 638-2551', icon: 'medkit-outline' },
   ];
 
   // Render card for each emergency item

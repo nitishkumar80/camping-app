@@ -60,15 +60,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.6)',
     borderRadius: 12,
     padding: 20,
-    width: 150,
-    height: 150,
+    width: 130,
+    height: 130,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 4,
+    borderColor: '#3498db', // Change border color
+    borderWidth: 2, // Outline width
+    shadowColor: '#3498db', // Shadow color after click
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.6,
+    shadowRadius: 8,
+    elevation: 4, // Deeper shadow for Androi
    
   },
   cardTitle: {

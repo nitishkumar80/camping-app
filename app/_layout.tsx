@@ -1,19 +1,27 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import 'react-native-reanimated';
-import React from 'react';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const [isSplashVisible, setSplashVisible] = useState(true);
 
+  // Effect to hide the splash screen after a brief delay (3 seconds in this case)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSplashVisible(false);
+    }, 3000); // Show the splash for 3 seconds
+
+    return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
+  }, []);
+
+  if (isSplashVisible) {
+    return <SplashScreenComponent />;
+  }
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -37,8 +45,37 @@ export default function RootLayout() {
         <Stack.Screen name="SurvivalTipsPage" options={{ headerShown: false }} />
         <Stack.Screen name="CampingGearPage" options={{ headerShown: false }} />
         <Stack.Screen name="HundruFallsPage" options={{ headerShown: false }} />
-         {/* Add PlanTripScreen */}
+        <Stack.Screen name="WinterCampingPage" options={{ headerShown: false }} />
+        {/* Add PlanTripScreen */}
       </Stack>
     </ThemeProvider>
   );
 }
+
+// Simple SplashScreen component with an image background
+const SplashScreenComponent = () => {
+  return (
+    <ImageBackground
+      source={{ uri: 'https://media.istockphoto.com/id/1128973207/vector/time-to-adventure-concept.jpg?s=612x612&w=0&k=20&c=OtdXlGejRL1ZWbVQt3jW8vZSXOUv8eOBbletqtXqQX4=' }} // Replace with your own image URL
+      style={styles.splashContainer}
+    >
+      <Text style={styles.splashText}>Welcome to Trip App</Text>
+    </ImageBackground>
+  );
+};
+
+// SplashScreen styles
+const styles = StyleSheet.create({
+  splashContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  splashText: {
+    fontSize: 32,
+    color: 'white',
+    fontWeight: 'bold',
+    position: 'absolute',
+    bottom: 100,
+  },
+});

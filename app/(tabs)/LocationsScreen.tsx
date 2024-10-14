@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // For icons
 import { FontAwesome } from 'react-native-vector-icons'; // For rating stars
@@ -100,77 +100,84 @@ const LocationsScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Back Icon */}
-      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="#333" />
-      </TouchableOpacity>
+    <ImageBackground
+    source={{ uri: 'https://png.pngtree.com/thumb_back/fh260/back_our/20190614/ourmid/pngtree-fresh-and-simple-h5-background-app-guide-page-design-background-download-image_121781.jpg' }}
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.overlay}>
+        {/* Back Icon */}
+       
 
-      {/* Search Bar */}
-      <TextInput
-        placeholder="Search campsites or trails..."
-        style={styles.searchBar}
-        value={searchQuery}
-        onChangeText={handleSearch}
-      />
+        {/* Search Bar */}
+        <TextInput
+          placeholder="Search campsites or trails..."
+          style={styles.searchBar}
+          value={searchQuery}
+          onChangeText={handleSearch}
+        />
 
-      {/* Map View */}
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 23.3441, // Centered around Ranchi
-          longitude: 85.3096,
-          latitudeDelta: 0.5,
-          longitudeDelta: 0.5,
-        }}
-      >
-        {filteredCampsites.map((campsite) => (
-          <Marker
-            key={campsite.id}
-            coordinate={{ latitude: campsite.latitude, longitude: campsite.longitude }}
-            title={campsite.name}
-            description={campsite.location}
-          />
-        ))}
-      </MapView>
+        {/* Map View */}
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: 23.3441, // Centered around Ranchi
+            longitude: 85.3096,
+            latitudeDelta: 0.5,
+            longitudeDelta: 0.5,
+          }}
+        >
+          {filteredCampsites.map((campsite) => (
+            <Marker
+              key={campsite.id}
+              coordinate={{ latitude: campsite.latitude, longitude: campsite.longitude }}
+              title={campsite.name}
+              description={campsite.location}
+            />
+          ))}
+        </MapView>
 
-      {/* Recommended Campsites */}
-      <Text style={styles.sectionTitle}>Recommended Campsites</Text>
-      <FlatList
-        data={filteredCampsites}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigateToFallPage(item.id)}>
-            <View style={styles.campsiteItem}>
-              {/* Icon and Name */}
-              <View style={styles.campsiteHeader}>
-                <Ionicons name="location-outline" size={24} color="#2C4A60" />
-                <Text style={styles.campsiteName}>{item.name}</Text>
+        {/* Recommended Campsites */}
+        <Text style={styles.sectionTitle}>Recommended Campsites</Text>
+        <FlatList
+          data={filteredCampsites}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => navigateToFallPage(item.id)}>
+              <View style={styles.campsiteItem}>
+                {/* Icon and Name */}
+                <View style={styles.campsiteHeader}>
+                  <Ionicons name="location-outline" size={24} color="#2C4A60" />
+                  <Text style={styles.campsiteName}>{item.name}</Text>
+                </View>
+
+                {/* Amenities and Location */}
+                <Text style={styles.campsiteInfo}>Amenities: {item.amenities}</Text>
+                <Text style={styles.campsiteInfo}>Location: {item.location}</Text>
+
+                {/* Rating with stars */}
+                <View style={styles.ratingContainer}>
+                  {renderRatingStars(item.rating)}
+                  <Text style={styles.ratingText}>{item.rating}/5</Text>
+                </View>
               </View>
-
-              {/* Amenities and Location */}
-              <Text style={styles.campsiteInfo}>Amenities: {item.amenities}</Text>
-              <Text style={styles.campsiteInfo}>Location: {item.location}</Text>
-
-              {/* Rating with stars */}
-              <View style={styles.ratingContainer}>
-                {renderRatingStars(item.rating)}
-                <Text style={styles.ratingText}>{item.rating}/5</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
-    </View>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#AEC1BA',
-    marginTop: 40,
+    justifyContent: 'center',
+  },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent overlay for better readability
+    flex: 1,
+    padding: 10,
   },
   backButton: {
     marginBottom: 10,
@@ -181,6 +188,9 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
     marginBottom: 20,
     padding: 10,
+    backgroundColor: '#fff', // Ensure the input is visible
+    borderRadius: 8,
+    marginTop:60,
   },
   map: {
     width: '100%',
@@ -191,10 +201,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#fff', // Ensure text is visible on background
   },
   campsiteItem: {
     padding: 15,
-    backgroundColor: '#e0e0e0',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Slightly transparent background for cards
     marginBottom: 10,
     borderRadius: 8,
     shadowColor: '#000',

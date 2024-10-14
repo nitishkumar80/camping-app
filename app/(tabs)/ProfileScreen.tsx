@@ -1,160 +1,179 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Image, FlatList, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native';
 
-// Dummy data for trip history
-const tripHistory = [
-  { id: '1', location: 'Yosemite National Park', date: '2024-10-10', activities: 'Hiking, Photography' },
-  { id: '2', location: 'Grand Canyon', date: '2024-11-05', activities: 'Camping, Rafting' },
-  { id: '3', location: 'Patratu Valley', date: '2024-09-15', activities: 'Boating, Trekking' },
-];
+const LoginSignupScreen = () => {
+  const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState(''); // For signup
 
-// Dummy data for packing lists
-const packingLists = [
-  { id: '1', title: 'Weekend Camping' },
-  { id: '2', title: 'Survival Trip' },
-  { id: '3', title: 'Family Camping Trip' },
-];
+  // Switch between login and signup forms
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+    clearForm();
+  };
 
-const ProfileScreen = () => {
-  const [name, setName] = useState('Nitish');
-  const [email, setEmail] = useState('nitish@gmail.com');
-  const [profilePicture, setProfilePicture] = useState('https://via.placeholder.com/100'); // Placeholder image
-
-  // Function to render trip history items
-  const renderTripHistoryItem = ({ item }) => (
-    <View style={styles.historyItem}>
-      <Text style={styles.listTitle}>{item.location}</Text>
-      <Text>Date: {item.date}</Text>
-      <Text>Activities: {item.activities}</Text>
-    </View>
-  );
-
-  // Function to render saved packing lists
-  const renderPackingListItem = ({ item }) => (
-    <View style={styles.listItem}>
-      <Text>{item.title}</Text>
-    </View>
-  );
+  // Clear form fields
+  const clearForm = () => {
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setName('');
+  };
 
   return (
-    <ScrollView style={styles.container}>
-      {/* Top Background Image */}
-      <View style={styles.topImageContainer}>
-        <Image
-          source={{ uri: 'https://img.freepik.com/fotos-premium/hombre-acampando_26791-3190.jpg?w=360' }} // Replace with your background image URL
-          style={styles.topImage}
-        />
-        {/* Profile Picture */}
-        <View style={styles.profilePictureContainer}>
-          <Image source={{ uri: profilePicture }} style={styles.profilePicture} />
+    <ImageBackground
+      source={{ uri: 'https://plus.unsplash.com/premium_photo-1673126683359-83a3c1481e7a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z2VvbWV0cmljJTIwYWJzdHJhY3R8ZW58MHx8MHx8fDA%3D' }} // Replace with your background image URL
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <ScrollView style={styles.container}>
+        {/* Top Background Image with Text Overlay */}
+        <View style={styles.topImageContainer}>
+          <Image
+            source={{ uri: 'https://t3.ftcdn.net/jpg/02/92/90/56/360_F_292905667_yFUJNJPngYeRNlrRL4hApHWxuYyRY4kN.jpg' }} // Replace with your secondary top image URL
+            style={styles.topImage}
+          />
+          {/* Text Overlay */}
+          <View style={styles.overlayTextContainer}>
+            <Text style={styles.overlayText}>{isLogin ? 'Login' : 'Sign Up'}</Text>
+          </View>
         </View>
-      </View>
 
-      {/* User Information Section */}
-      <View style={styles.profileSection}>
-        <Text style={styles.sectionTitle}>User Information</Text>
-        <TextInput style={styles.input} value={name} onChangeText={setName} placeholder="Name" />
-        <TextInput style={styles.input} value={email} onChangeText={setEmail} placeholder="Email" />
-        <Button title="Change Profile Picture" onPress={() => alert('Change Picture')} />
-      </View>
+        <View style={styles.formContainer}>
+          {/* Name Input for Signup */}
+          {!isLogin && (
+            <TextInput
+              style={styles.input}
+              value={name}
+              onChangeText={setName}
+              placeholder="Name"
+            />
+          )}
 
-      {/* Trip History Section */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Trip History</Text>
-        <FlatList
-          data={tripHistory}
-          keyExtractor={(item) => item.id}
-          renderItem={renderTripHistoryItem}
-        />
-      </View>
+          {/* Email Input */}
+          <TextInput
+            style={styles.input}
+            value={email}
+            onChangeText={setEmail}
+            placeholder="Email"
+            keyboardType="email-address"
+          />
 
-      {/* Saved Packing Lists Section */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Saved Packing Lists</Text>
-        <FlatList
-          data={packingLists}
-          keyExtractor={(item) => item.id}
-          renderItem={renderPackingListItem}
-        />
-        <Button title="Manage Packing Lists" onPress={() => alert('Manage Packing Lists')} />
-      </View>
+          {/* Password Input */}
+          <TextInput
+            style={styles.input}
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Password"
+            secureTextEntry
+          />
 
-      {/* Settings Section */}
-     
+          {/* Confirm Password Input for Signup */}
+          {!isLogin && (
+            <TextInput
+              style={styles.input}
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
+              placeholder="Confirm Password"
+              secureTextEntry
+            />
+          )}
 
-      {/* Feedback Section */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>App Feedback</Text>
-        <Button title="Submit Feedback" onPress={() => alert('Submit Feedback')} />
-        <Button title="Report an Issue" onPress={() => alert('Report an Issue')} />
-      </View>
-    </ScrollView>
+          {/* Login/Signup Button */}
+          <Button
+            title={isLogin ? 'Login' : 'Sign Up'}
+            onPress={() => alert(isLogin ? 'Logging In...' : 'Signing Up...')}
+          />
+
+          {/* Toggle Between Login and Signup */}
+          <TouchableOpacity onPress={toggleForm}>
+            <Text style={styles.toggleText}>
+              {isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Login'}
+            </Text>
+          </TouchableOpacity>
+
+          {/* Forgot Password Link */}
+          {isLogin && (
+            <TouchableOpacity>
+              <Text style={styles.text}>Forgot Password?</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </ScrollView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
-    backgroundColor: '#AEC1BA',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional to add a darker overlay over the background image
   },
   topImageContainer: {
     position: 'relative',
+    alignItems: 'center',
   },
   topImage: {
     width: '100%',
-    height: 200,
+    height: 250,
   },
-  profilePictureContainer: {
+  overlayTextContainer: {
     position: 'absolute',
-    bottom: -50,
+    top: 100, // Adjust positioning as needed
     left: '50%',
     transform: [{ translateX: -50 }],
     alignItems: 'center',
   },
-  profilePicture: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    borderWidth: 3,
-    borderColor: '#fff',
+  overlayText: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#FFF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
-  profileSection: {
-    alignItems: 'center',
-    marginTop: 60,
+  formContainer: {
     paddingHorizontal: 20,
+    paddingVertical: 40,
+    backgroundColor: '#25B6B0',
+    marginHorizontal: 20,
+    borderRadius: 10,
+    marginTop: -40,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   input: {
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
-    marginBottom: 10,
-    padding: 8,
-    width: '100%',
-  },
-  section: {
     marginBottom: 20,
-    paddingHorizontal: 20,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  listItem: {
     padding: 10,
-    backgroundColor: '#59917C',
-    marginBottom: 10,
-    borderRadius: 8,
+    fontSize: 16,
+    color: 'white',
   },
-  historyItem: {
-    padding: 10,
-    backgroundColor: '#59917C',
-    marginBottom: 10,
-    borderRadius: 8,
+  toggleText: {
+    textAlign: 'center',
+    color: 'white',
+    marginTop: 20,
+    fontSize: 16,
+    textDecorationLine: 'underline !important', // No !important needed
   },
-  listTitle: {
-    fontWeight: 'bold',
-    color: '#fff',
+  text: {
+    textAlign: 'center',
+    color: 'white',
+    marginTop: 20,
+    fontSize: 16,
+    textDecorationLine: 'underline !important', // No !important needed
   },
 });
 
-export default ProfileScreen;
+
+export default LoginSignupScreen;

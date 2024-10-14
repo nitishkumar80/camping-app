@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ImageBackground, Image } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -29,44 +29,78 @@ const SurvivalPage: React.FC = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* Top Image */}
-      <Image
-        source={{ uri: 'https://www.shutterstock.com/image-vector/sunset-vector-background-beautiful-landscape-260nw-2004648149.jpg' }} // Replace with your image URL
-        style={styles.topImage}
-        resizeMode="cover"
-      />
+    <ImageBackground
+      source={{ uri: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHx8fA%3D%3D' }} // Replace with your background image URL
+      style={styles.background}
+      resizeMode="cover"
+      blurRadius={7}
+    >
+      <SafeAreaView style={styles.container}>
+        {/* Top Image */}
+        <View style={styles.imageContainer}>
+          <Image
+            source={{ uri: 'https://img.freepik.com/premium-vector/ultimate-adventure-equipment-camping-climbing-illustration-guide_1273024-682.jpg' }} // Replace with your image URL
+            style={styles.topImage}
+            resizeMode="cover"
+          />
+          <View style={styles.overlayTextContainer}>
+            <Text style={styles.overlayText}>Survival Tips</Text>
+          </View>
+        </View>
 
-      {/* Cards Section */}
-      <View style={styles.cardsContainer}>
-        {cardData.map(renderCard)}
-      </View>
-    </SafeAreaView>
+        {/* Cards Section */}
+        <View style={styles.cardsContainer}>
+          {cardData.map(renderCard)}
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
-    backgroundColor: '#EDF3F8',
-    padding: 20,
+    marginTop: 40,
+  },
+  imageContainer: {
+    position: 'relative',
   },
   topImage: {
     width: '100%',
-    height: 200,
-   resizeMode: 'cover',
+    height: 220,
+    resizeMode: 'cover',
     marginBottom: 20,
+ 
+   
+  },
+  overlayTextContainer: {
+    position: 'absolute',
+    bottom: 10, // Position near the bottom of the image
+    left: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+    padding: 10,
+    borderRadius: 5,
+  },
+  overlayText: {
+    color: '#FFF',
+    fontSize: 24,
+    fontWeight: 'bold',
   },
   cardsContainer: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    padding: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   card: {
     width: '45%',
-    backgroundColor: '#FFF',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)', // Slightly transparent background
     padding: 20,
     borderRadius: 10,
     marginBottom: 20,
