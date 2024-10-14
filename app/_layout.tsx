@@ -14,21 +14,6 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
-  // Load custom fonts
-  const [fontsLoaded] = useFonts({
-    'Poppins-Bold': require('../assets/fonts/Poppins-ExtraBold.ttf'),
-  });
-
-  // Hide splash screen once fonts are loaded
-  useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null; // Render nothing until fonts are loaded
-  }
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
