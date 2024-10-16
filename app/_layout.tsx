@@ -28,7 +28,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
-        <Stack.Screen name="LocationsScreen" options={{ headerShown: false }} />
+       
         <Stack.Screen name="WeatherDetails" options={{ headerShown: false }} />
         <Stack.Screen name="PackingList" options={{ headerShown: false }} />
         <Stack.Screen name="DetailsScreen" options={{ headerShown: false }} />
@@ -59,7 +59,8 @@ const SplashScreenComponent = () => {
       source={{ uri: 'https://media.istockphoto.com/id/1128973207/vector/time-to-adventure-concept.jpg?s=612x612&w=0&k=20&c=OtdXlGejRL1ZWbVQt3jW8vZSXOUv8eOBbletqtXqQX4=' }} // Replace with your own image URL
       style={styles.splashContainer}
     >
-      <Text style={styles.splashText}>Welcome to Trip App</Text>
+      <Text style={styles.splashText}>Welcome to Aspan</Text>
+     
     </ImageBackground>
   );
 };
@@ -78,4 +79,5 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 100,
   },
+ 
 });

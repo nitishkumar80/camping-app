@@ -51,7 +51,7 @@ const recommendedCampsites: Campsite[] = [
   },
 ];
 
-const LocationsScreen: React.FC = () => {
+const LocationScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [filteredCampsites, setFilteredCampsites] = useState<Campsite[]>(recommendedCampsites);
   const navigation = useNavigation(); // Hook to get navigation object
@@ -241,4 +241,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LocationsScreen;
+export default LocationScreen;

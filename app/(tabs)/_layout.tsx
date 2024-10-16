@@ -30,7 +30,7 @@ export default function TabLayout() {
 
       {/* Locations Screen */}
       <Tabs.Screen
-        name="LocationsScreen"
+        name="LocationScreen"
         options={{
           title: 'Locations',
           tabBarIcon: ({ color, focused }) => (
