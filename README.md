@@ -1,50 +1,29 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Get started
+The app combines essential features that enhance the overall camping experience, from trip planning to survival tips. Let me take you through some of its key features and functionalities:
 
-1. Install dependencies
+🏠  Home Screen
+- Popular Trips & Recommendations : Get personalized trip suggestions and explore destinations like Hundru Falls, Jonha Falls, Dassam Falls, and Patratu Valley.
+- Quick Actions: Easily access trip planning tools, packing lists, and location guides.
 
-   ```bash
-   npm install
-   ```
+📍 Locations Screen
+- Explore Campsites & Trails: Discover top camping locations across Ranchi, Jharkhand, with detailed amenities, activities, and ratings.
+- Search & Navigate: Use the interactive map and search bar to find your ideal campsite, with locations like Ranchi Hill, onha Falls , and Patratu Valley.
 
-2. Start the app
+ 🧭 Survival Tips Page
+- Essential Guides: From survival tips and wildlife guides to emergency information and camping gear suggestions, this section has everything you need to prepare for the wilderness.
+- Offline Capabilities: Access essential guides even without an internet connection, ensuring you're always equipped.
 
-   ```bash
-    npx expo start
-   ```
+🗺️ Tab Navigation
+- Home: Your central hub for all features.
+- Locations: Explore beautiful camping spots and trails.
+- Survival Tips: Learn survival techniques, gear suggestions, and offline guides.
+- Profile: Manage your settings, preferences, and account details.
 
-In the output, you'll find options to open the app in a
+ 📅 Plan Your Next Adventure
+The app allows users to plan trips, view packing lists, and explore beautiful destinations with ease. Whether you are trekking, hiking, boating, or just camping, this app covers all your needs.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+🔧 Technologies Used
+- React Native for cross-platform development.
+- Expo Router for efficient navigation.
+- Vector Icons & Maps for a smooth and interactive UI.
